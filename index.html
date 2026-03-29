@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lone Juror: Playful Edition</title>
+    <title>คิดดิคอล thinking</title>
     <link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,8 +13,8 @@
         
         <header class="global-header">
             <div class="brand-area">
-                <h1 id="ui-app-title">คิดดิคอล Thinking 💡</h1>
-                <p id="ui-app-subtitle">แบบประเมิน Critical Thinking</p>
+                <h1 id="ui-app-title">คิดดิคอล thinking 💡</h1>
+                <p id="ui-app-subtitle">4</p>
             </div>
             <div class="lang-switcher">
                 <button id="lang-th" class="lang-btn active">TH</button>
@@ -22,14 +22,24 @@
             </div>
         </header>
 
-        <section id="home-screen">
-            <div class="content-wrapper">
+        <section id="welcome-screen">
+            <div class="content-wrapper" style="text-align: center; margin-top: 50px;">
+                <div class="hero-icon" style="font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite;">💡</div>
+                <h1 id="ui-welcome-title" style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">คิดดิคอล thinking</h1>
+                <p id="ui-welcome-subtitle" style="color: var(--text-sub); margin-bottom: 40px; font-size: 1rem; font-weight: 500;">แบบประเมินทักษะการคิดเชิงวิพากษ์</p>
+                
+                <button class="btn-primary" id="start-game-btn">เริ่มเกม</button>
+            </div>
+        </section>
+
+        <section id="spin-screen" class="hidden">
+            <div class="content-wrapper" style="margin-top: 40px;">
+                <h3 id="spin-label" style="text-align: center; color: var(--text-sub); margin-bottom: 20px; font-weight: 700; font-size: 1.1rem;">กำลังสุ่มคดีที่ 1/10</h3>
                 <div id="capture">
                     <div class="case-slot" id="case-slot">
-                        <div class="slot-text" id="slot-text">❓ กดปุ่มเพื่อเริ่มเลย ❓</div>
+                        <div class="slot-text" id="slot-text">❓ กำลังสุ่ม... ❓</div>
                     </div>
                 </div>
-                <button class="btn-primary" id="start-spin-btn">เริ่มสุ่มคดี (1/10)</button>
             </div>
         </section>
 
