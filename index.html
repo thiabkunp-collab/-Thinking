@@ -26,10 +26,53 @@
             <div class="content-wrapper">
                 <div id="capture">
                     <div class="case-slot" id="case-slot">
-                        <div class="slot-text" id="slot-text">❓ กดปุ่มเพื่อสุ่มคดี ❓</div>
+                        <div class="slot-text" id="slot-text">❓ กดปุ่มเพื่อเริ่มเลย ❓</div>
                     </div>
                 </div>
                 <button class="btn-primary" id="start-spin-btn">เริ่มสุ่มคดี (1/10)</button>
+            </div>
+        </section>
+
+        <section id="tutorial-screen" class="hidden">
+            <div class="content-wrapper" style="text-align: center; margin-top: 0;">
+                <h2 id="ui-tut-main-title" class="tut-main-title">วิธีการเล่น</h2>
+
+                <div class="tut-step" id="tut-step-1">
+                    <div class="tut-icon">🔍</div>
+                    <h3 id="ui-tut-s1-title">1. สังเกตข่าว</h3>
+                    <p id="ui-tut-s1-desc" class="tut-desc">อ่านพาดหัวข่าว และดูป้ายแหล่งที่มา</p>
+                    <div class="news-card" style="margin-bottom: 0;">
+                        <div id="ui-tut-mock-tag" class="source-badge">📌 มักพบใน: ไลน์กลุ่ม</div>
+                        <p id="ui-tut-mock-text" style="font-weight: 700; color: var(--text-main);">ดื่มน้ำปลาผสมมะนาว รักษามะเร็งหายขาด!</p>
+                    </div>
+                </div>
+
+                <div class="tut-step hidden" id="tut-step-2">
+                    <div class="tut-icon">👆</div>
+                    <h3 id="ui-tut-s2-title">2. จับผิดคำลวง</h3>
+                    <p id="ui-tut-s2-desc" class="tut-desc">ถ้าเจอคำที่ขัดกับความจริง ให้จิ้มเลือกคำนั้น</p>
+                    <div class="word-pool">
+                        <div id="ui-tut-mock-word" class="word-chip selected" style="pointer-events: none;">หายขาด!</div>
+                    </div>
+                </div>
+
+                <div class="tut-step hidden" id="tut-step-3">
+                    <div class="tut-icon">✅</div>
+                    <h3 id="ui-tut-s3-title">3. ข่าวจริงก็มีนะ</h3>
+                    <p id="ui-tut-s3-desc" class="tut-desc">ถ้าข่าวสมเหตุสมผล ให้กดปุ่ม 'ข่าวนี้ปกติ' ได้เลย</p>
+                    <button class="btn-secondary" id="ui-tut-mock-safe" style="pointer-events: none;">✅ ข่าวนี้ปกติ</button>
+                </div>
+
+                <div class="tut-dots">
+                    <span class="dot active" id="dot-1"></span>
+                    <span class="dot" id="dot-2"></span>
+                    <span class="dot" id="dot-3"></span>
+                </div>
+            </div>
+
+            <div class="game-actions tut-actions">
+                <button class="btn-secondary hidden" id="tut-back-btn">ย้อนกลับ</button>
+                <button class="btn-primary" id="tut-next-btn">ถัดไป</button>
             </div>
         </section>
 
