@@ -2,11 +2,12 @@ let currentLang = 'th';
 
 const uiTexts = {
     th: {
-        appTitle: "The Lone Juror 💡", appSubtitle: "แบบประเมิน Critical Thinking",
-        btnSpinPrefix: "เริ่มสุ่มคดีที่", btnSafe: "✅ ข่าวนี้ปกติ", btnSubmit: "ส่งบทวิเคราะห์",
+        appTitle: "คิดดิคอล thinking 💡", appSubtitle: "แบบประเมิน Critical Thinking",
+        btnStartGame: "เริ่มเกม",
+        spinLabelPrefix: "กำลังสุ่มคดีที่", btnSafe: "✅ ข่าวนี้ปกติ", btnSubmit: "ส่งบทวิเคราะห์",
         btnRestart: "เริ่มทำใหม่", btnDownload: "📥 โหลดผลลัพธ์", insightLabel: "คำอธิบายเพิ่มเติม:",
         questionProgressLabel: "คดีที่: ", sourcePrefix: "แหล่งที่มา: ", missedLabel: "จุดที่คุณพลาดไป 😲",
-        wrongLabel: "คำที่คุณโดนหลอก 🧐", slotReady: "❓ กดปุ่มด้านล่างเพื่อเริ่ม ❓",
+        wrongLabel: "คำที่คุณโดนหลอก 🧐",
         
         // Tutorial Texts
         tutMainTitle: "วิธีการเล่น", tutS1Title: "1. สังเกตข่าว", tutS1Desc: "อ่านพาดหัวข่าว และดูป้ายแหล่งที่มา",
@@ -16,11 +17,12 @@ const uiTexts = {
         btnTutBack: "ย้อนกลับ", btnTutNext: "ถัดไป", btnTutStart: "เริ่มเกมเลย!"
     },
     en: {
-        appTitle: "The Lone Juror 💡", appSubtitle: "Critical Thinking Assessment",
-        btnSpinPrefix: "Spin Case", btnSafe: "✅ Normal News", btnSubmit: "Submit Analysis",
+        appTitle: "Critical Thinking 💡", appSubtitle: "Critical Thinking Assessment",
+        btnStartGame: "Start Game",
+        spinLabelPrefix: "Spinning Case", btnSafe: "✅ Normal News", btnSubmit: "Submit Analysis",
         btnRestart: "Start Over", btnDownload: "📥 Download", insightLabel: "Explanation:",
         questionProgressLabel: "Case: ", sourcePrefix: "Source: ", missedLabel: "Missed Flags 😲",
-        wrongLabel: "Incorrect 🧐", slotReady: "❓ Press button to start ❓",
+        wrongLabel: "Incorrect 🧐",
 
         // Tutorial Texts
         tutMainTitle: "How to Play", tutS1Title: "1. Observe News", tutS1Desc: "Read headline and check the source tag",
@@ -41,7 +43,7 @@ const summaryTexts = {
     en: [ { title: "Master 🌟", desc: "Excellent discernment. Immune to fake news!" }, { title: "Advanced 🏅", desc: "Good analysis, occasionally susceptible to smooth claims." }, { title: "Beginner ⚠️", desc: "Tends to fall for emotional triggers. Caution advised." }, { title: "Critical 🚨", desc: "Media literacy is at a dangerous level. High scam risk." } ]
 };
 
-// ข้อมูล 30 ข้อแบบบีบอัด
+// ข้อมูล 27 
 const DATA=[
 {t:{h:"ยอดแชร์ทะลุแสน! ฟังคลื่นเสียงนี้ตอนหลับ สมองจะจำหนังสือได้ทั้งเล่ม",w:["ยอดแชร์ทะลุแสน!","ฟังคลื่นเสียงตอนหลับ","จำหนังสือได้ทั้งเล่ม"],s:"TikTok",l:"ไม่มีหลักฐานวิทย์ยืนยันว่าสมองจำได้ตอนหลับ"},e:{h:"100K+ Shares! Listen to soundwave while sleeping to memorize books.",w:["100K+ Shares!","Listen sleeping","Memorize books"],s:"TikTok",l:"No evidence supports sleep learning."},tr:[0],rf:[1,2]},
 {t:{h:"กสทช. เตือนประชาชนระวังมิจฉาชีพ แอบอ้างเป็นตำรวจ",w:["กสทช. เตือน","ระวังมิจฉาชีพ","แอบอ้างตำรวจ"],s:"Official",l:"ประกาศเตือนภัยจริง"},e:{h:"NBTC warns public of scammers impersonating police.",w:["NBTC warns","Beware scammers","Impersonating police"],s:"Official",l:"Real government alert."},tr:[],rf:[]},
@@ -81,13 +83,20 @@ const TOTAL_CASES = 10;
 let remainingCases = [], currentCase = null, currentCaseNum = 1, correctAnswersCount = 0;
 let selectedWordsSet = new Set(); 
 let tutCurrentStep = 1;
-let tutorialPassed = false; // ตัวแปรเช็คว่าผ่าน Tutorial หรือยัง
+let tutorialPassed = false; 
 
-const homeScreen = document.getElementById('home-screen'), gameScreen = document.getElementById('game-screen');
+// ตัวแปรเชื่อมต่อ DOM ใหม่
+const welcomeScreen = document.getElementById('welcome-screen');
+const spinScreen = document.getElementById('spin-screen');
+const gameScreen = document.getElementById('game-screen');
 const tutorialScreen = document.getElementById('tutorial-screen');
-const summaryScreen = document.getElementById('summary-screen'), resultOverlay = document.getElementById('result-overlay');
-const wordFeedbackBox = document.getElementById('word-feedback'), startSpinBtn = document.getElementById('start-spin-btn');
-const caseSlot = document.getElementById('case-slot'), slotText = document.getElementById('slot-text');
+const summaryScreen = document.getElementById('summary-screen');
+const resultOverlay = document.getElementById('result-overlay');
+const wordFeedbackBox = document.getElementById('word-feedback');
+const startGameBtn = document.getElementById('start-game-btn'); // ปุ่มเริ่มเกมอันใหม่
+const caseSlot = document.getElementById('case-slot');
+const slotText = document.getElementById('slot-text');
+const spinLabel = document.getElementById('spin-label');
 
 document.getElementById('lang-th').onclick = () => setLanguage('th');
 document.getElementById('lang-en').onclick = () => setLanguage('en');
@@ -96,9 +105,13 @@ function setLanguage(lang) {
     currentLang = lang;
     document.getElementById('lang-th').classList.toggle('active', lang === 'th');
     document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    
     const txt = uiTexts[lang];
     document.getElementById('ui-app-title').innerText = txt.appTitle;
     document.getElementById('ui-app-subtitle').innerText = txt.appSubtitle;
+    document.getElementById('ui-welcome-title').innerText = txt.appTitle;
+    document.getElementById('startGameBtn').innerText = txt.btnStartGame;
+    
     document.getElementById('ui-question-label').innerText = txt.questionProgressLabel;
     document.getElementById('ui-instruction').innerText = txt.instruction;
     document.getElementById('submit-btn').innerText = txt.btnSubmit;
@@ -107,7 +120,6 @@ function setLanguage(lang) {
     document.getElementById('ui-insight-label').innerText = txt.insightLabel;
     document.getElementById('btn-restart').innerText = txt.btnRestart;
     
-    // อัปเดตภาษาหน้า Tutorial
     document.getElementById('ui-tut-main-title').innerText = txt.tutMainTitle;
     document.getElementById('ui-tut-s1-title').innerText = txt.tutS1Title;
     document.getElementById('ui-tut-s1-desc').innerText = txt.tutS1Desc;
@@ -124,15 +136,24 @@ function setLanguage(lang) {
     if (tutCurrentStep === 3) document.getElementById('tut-next-btn').innerText = txt.btnTutStart;
     else document.getElementById('tut-next-btn').innerText = txt.btnTutNext;
 
-    if (caseSlot.className === 'case-slot') slotText.innerText = txt.slotReady;
-    updateHomeUI();
+    if (!spinScreen.classList.contains('hidden')) {
+        spinLabel.innerText = `${txt.spinLabelPrefix} ${currentCaseNum}/${TOTAL_CASES}`;
+    }
 }
 
-function updateHomeUI() {
-    if (currentCaseNum <= TOTAL_CASES) startSpinBtn.innerText = `${uiTexts[currentLang].btnSpinPrefix} ${currentCaseNum}/${TOTAL_CASES}`;
-}
+// 2. ควบคุมปุ่ม เริ่มเกม 
+startGameBtn.onclick = () => {
+    if (!tutorialPassed) {
+        tutCurrentStep = 1;
+        updateTutorialView();
+        switchScreenSmoothly(welcomeScreen, tutorialScreen, () => {});
+    } else {
+        switchScreenSmoothly(welcomeScreen, spinScreen, () => {
+            triggerSpin();
+        });
+    }
+};
 
-// 2. ระบบ Tutorial
 function updateTutorialView() {
     const txt = uiTexts[currentLang];
     document.getElementById('tut-step-1').classList.add('hidden');
@@ -163,8 +184,8 @@ document.getElementById('tut-next-btn').onclick = () => {
         updateTutorialView();
     } else {
         tutorialPassed = true;
-        switchScreenSmoothly(tutorialScreen, homeScreen, () => {
-            triggerSpin(); // จบ Tutorial ให้หมุนสล็อตเลย
+        switchScreenSmoothly(tutorialScreen, spinScreen, () => {
+            triggerSpin(); // จบ Tutorial ให้เด้งไปหน้าสุ่มคดี
         });
     }
 };
@@ -176,19 +197,10 @@ document.getElementById('tut-back-btn').onclick = () => {
     }
 };
 
-startSpinBtn.onclick = () => {
-    // เช็คว่าผ่าน Tutorial หรือยัง
-    if (!tutorialPassed) {
-        tutCurrentStep = 1;
-        updateTutorialView();
-        switchScreenSmoothly(homeScreen, tutorialScreen, () => {});
-    } else {
-        triggerSpin();
-    }
-};
-
+// ฟังก์ชันสุ่มคดี (ใช้กับหน้า Spin Screen)
 function triggerSpin() {
-    startSpinBtn.disabled = true; caseSlot.className = 'case-slot'; 
+    spinLabel.innerText = `${uiTexts[currentLang].spinLabelPrefix} ${currentCaseNum}/${TOTAL_CASES}`;
+    caseSlot.className = 'case-slot'; 
     const randomIndex = Math.floor(Math.random() * remainingCases.length);
     currentCase = remainingCases.splice(randomIndex, 1)[0];
     const cLang = currentCase[currentLang], duration = 2000, tickInterval = 100, totalTicks = Math.floor(duration / tickInterval);
@@ -201,19 +213,19 @@ function triggerSpin() {
             slotText.innerText = cLang.headline;
             caseSlot.className = 'case-slot done'; 
             clearInterval(timer);
-            setTimeout(() => switchScreenSmoothly(homeScreen, gameScreen, loadCaseToJudgingView), 1200);
+            // เมื่อสุ่มเสร็จ ให้หน่วงเวลาและเด้งไปหน้าจอคำถาม
+            setTimeout(() => switchScreenSmoothly(spinScreen, gameScreen, loadCaseToJudgingView), 1200);
         }
         currentTick++;
     }, tickInterval);
 }
 
-// ฟังก์ชันเปิดปิดคำศัพท์
 window.toggleWord = function(index, el) {
     el.classList.toggle('selected');
     selectedWordsSet.has(index) ? selectedWordsSet.delete(index) : selectedWordsSet.add(index);
 };
 
-// 3. ระบบจับผิด (DNA จากคลาส .map().join)
+// 3. ระบบจับผิด
 function loadCaseToJudgingView() {
     selectedWordsSet.clear();
     const c = currentCase, cLang = c[currentLang], txt = uiTexts[currentLang];
@@ -277,13 +289,17 @@ function evaluateAnalysis(markedSafe) {
             resultOverlay.classList.add('hidden'); resultOverlay.classList.remove('fade-out');
             currentCaseNum++;
             if (currentCaseNum <= TOTAL_CASES) {
-                switchScreenSmoothly(gameScreen, homeScreen, () => { caseSlot.className = 'case-slot'; updateHomeUI(); triggerSpin(); });
-            } else switchScreenSmoothly(gameScreen, summaryScreen, showFinalSummary);
+                // เปลี่ยนหน้าจากคำถาม กลับไปหน้าสุ่มคดี
+                switchScreenSmoothly(gameScreen, spinScreen, () => { triggerSpin(); });
+            } else {
+                // จบเกม ไปหน้าสรุปผล
+                switchScreenSmoothly(gameScreen, summaryScreen, showFinalSummary);
+            }
         }, 300);
     }, 2800);
 }
 
-// 4. SUMMARY & EXPORT (DNA จากคลาส html2canvas)
+// 4. SUMMARY & EXPORT
 function showFinalSummary() {
     let levelIdx = 0;
     if (correctAnswersCount >= 9) levelIdx = 0; else if (correctAnswersCount >= 6) levelIdx = 1; else if (correctAnswersCount >= 4) levelIdx = 2; else levelIdx = 3;
@@ -318,9 +334,24 @@ function switchScreenSmoothly(currentScreen, nextScreen, setupFunction) {
 function initApp() {
     remainingCases = [...ORIGINAL_CASES_DATA]; 
     correctAnswersCount = 0; currentCaseNum = 1; tutorialPassed = false;
-    homeScreen.style.display = ""; gameScreen.style.display = ""; summaryScreen.style.display = ""; tutorialScreen.style.display = "";
-    gameScreen.classList.add('hidden'); summaryScreen.classList.add('hidden'); tutorialScreen.classList.add('hidden');
-    homeScreen.classList.remove('hidden');
+    
+    // ตั้งค่าหน้าจอเริ่มต้น
+    welcomeScreen.style.display = ""; 
+    spinScreen.style.display = ""; 
+    gameScreen.style.display = ""; 
+    summaryScreen.style.display = ""; 
+    tutorialScreen.style.display = "";
+    
+    spinScreen.classList.add('hidden');
+    gameScreen.classList.add('hidden'); 
+    summaryScreen.classList.add('hidden'); 
+    tutorialScreen.classList.add('hidden');
+    
+    welcomeScreen.classList.remove('hidden');
+    
+    // ตั้งค่าภาษาและข้อความเริ่มต้น
+    document.getElementById('start-game-btn').innerText = uiTexts[currentLang].btnStartGame;
     setLanguage('th');
 }
+
 initApp();
