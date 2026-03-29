@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lone Juror: Playful Edition</title>
+    <link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <header class="global-header">
+            <div class="brand-area">
+                <h1 id="ui-app-title">The Lone Juror 💡</h1>
+                <p id="ui-app-subtitle">แบบประเมิน Critical Thinking</p>
+            </div>
+            <div class="lang-switcher">
+                <button id="lang-th" class="lang-btn active">TH</button>
+                <button id="lang-en" class="lang-btn">EN</button>
+            </div>
+        </header>
+
+        <section id="home-screen">
+            <div class="content-wrapper">
+                <div id="capture">
+                    <div class="case-slot" id="case-slot">
+                        <div class="slot-text" id="slot-text">❓ กดปุ่มเพื่อสุ่มคดี ❓</div>
+                    </div>
+                </div>
+                <button class="btn-primary" id="start-spin-btn">เริ่มสุ่มคดี (1/10)</button>
+            </div>
+        </section>
+
+        <section id="game-screen" class="hidden">
+            <div class="progress-info">
+                <span id="ui-question-label">พิพากษาคดีที่: </span><span id="question-progress">1/10</span>
+            </div>
+            <main>
+                <div class="news-card">
+                    <div id="source-badge" class="source-badge">📌 ...</div>
+                    <p id="headline">...</p>
+                </div>
+                <p id="ui-instruction" class="instruction-text">จิ้มคำที่ขัดแย้งกับเหตุผล หรือกด "ข่าวนี้ปกติ"</p>
+                <div class="word-pool" id="word-pool"></div>
+            </main>
+            <footer class="game-actions">
+                <button class="btn-primary" id="submit-btn">ส่งบทวิเคราะห์</button>
+                <button class="btn-secondary" id="safe-btn">✅ ข่าวนี้ปกติ</button>
+            </footer>
+        </section>
+
+        <div id="result-overlay" class="overlay hidden">
+            <div class="modal">
+                <h2 id="result-title">...</h2>
+                <p id="result-body">...</p>
+                <div id="word-feedback" class="word-feedback hidden"></div>
+                <div class="logic-panel">
+                    <strong id="ui-insight-label">Critical Thinking Insight:</strong>
+                    <p id="logic-text">...</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="summary-screen" class="hidden">
+            <div id="summary-capture" class="summary-content">
+                <div class="hero-icon">🏆</div>
+                <h1 id="ui-summary-title" class="summary-title">สรุปผลประเมิน</h1>
+                <h2 id="summary-score" class="summary-score">0/10 คะแนน</h2>
+                <div class="summary-card">
+                    <h3 id="summary-title" class="level-title">ระดับ ...</h3>
+                    <p id="summary-desc" class="level-desc"></p>
+                </div>
+            </div>
+            
+            <div class="game-actions" style="margin-top: 20px;">
+                <button class="btn-secondary" id="btn-download">📥 ดาวน์โหลดผลลัพธ์</button>
+                <button class="btn-primary" id="btn-restart">ทำใหม่</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
