@@ -1,8 +1,34 @@
 let currentLang = 'th';
 
 const uiTexts = {
-    th: { appTitle: "The Lone Juror 💡", appSubtitle: "แบบประเมิน Critical Thinking", btnSpinPrefix: "เริ่มสุ่มคดีที่", btnSafe: "✅ ข่าวนี้ปกติ", btnSubmit: "ส่งบทวิเคราะห์", btnRestart: "เริ่มทำใหม่", btnDownload: "📥 โหลดผลลัพธ์", insightLabel: "คำอธิบายเพิ่มเติม:", questionProgressLabel: "คดีที่: ", sourcePrefix: "แหล่งที่มา: ", missedLabel: "จุดที่คุณพลาดไป 😲", wrongLabel: "คำที่คุณโดนหลอก 🧐", slotReady: "พร้อมแล้วกดปุ่มด้านล่างเลย!" },
-    en: { appTitle: "The Lone Juror 💡", appSubtitle: "Critical Thinking Assessment", btnSpinPrefix: "Spin Case", btnSafe: "✅ Normal News", btnSubmit: "Submit Analysis", btnRestart: "Start Over", btnDownload: "📥 Download", insightLabel: "Explanation:", questionProgressLabel: "Case: ", sourcePrefix: "Source: ", missedLabel: "Missed Flags 😲", wrongLabel: "Incorrect 🧐", slotReady: "Ready! Press the button below." }
+    th: {
+        appTitle: "The Lone Juror 💡", appSubtitle: "แบบประเมิน Critical Thinking",
+        btnSpinPrefix: "เริ่มสุ่มคดีที่", btnSafe: "✅ ข่าวนี้ปกติ", btnSubmit: "ส่งบทวิเคราะห์",
+        btnRestart: "เริ่มทำใหม่", btnDownload: "📥 โหลดผลลัพธ์", insightLabel: "คำอธิบายเพิ่มเติม:",
+        questionProgressLabel: "คดีที่: ", sourcePrefix: "แหล่งที่มา: ", missedLabel: "จุดที่คุณพลาดไป 😲",
+        wrongLabel: "คำที่คุณโดนหลอก 🧐", slotReady: "❓ กดปุ่มด้านล่างเพื่อเริ่ม ❓",
+        
+        // Tutorial Texts
+        tutMainTitle: "วิธีการเล่น", tutS1Title: "1. สังเกตข่าว", tutS1Desc: "อ่านพาดหัวข่าว และดูป้ายแหล่งที่มา",
+        tutMockTag: "📌 มักพบใน: ไลน์กลุ่ม", tutMockText: "ดื่มน้ำปลาผสมมะนาว รักษามะเร็งหายขาด!",
+        tutS2Title: "2. จับผิดคำลวง", tutS2Desc: "ถ้าเจอคำที่ขัดกับความจริง ให้จิ้มเลือกคำนั้น", tutMockWord: "หายขาด!",
+        tutS3Title: "3. ข่าวจริงก็มีนะ", tutS3Desc: "ถ้าข่าวสมเหตุสมผล ให้กดปุ่ม 'ข่าวนี้ปกติ' ได้เลย",
+        btnTutBack: "ย้อนกลับ", btnTutNext: "ถัดไป", btnTutStart: "เริ่มเกมเลย!"
+    },
+    en: {
+        appTitle: "The Lone Juror 💡", appSubtitle: "Critical Thinking Assessment",
+        btnSpinPrefix: "Spin Case", btnSafe: "✅ Normal News", btnSubmit: "Submit Analysis",
+        btnRestart: "Start Over", btnDownload: "📥 Download", insightLabel: "Explanation:",
+        questionProgressLabel: "Case: ", sourcePrefix: "Source: ", missedLabel: "Missed Flags 😲",
+        wrongLabel: "Incorrect 🧐", slotReady: "❓ Press button to start ❓",
+
+        // Tutorial Texts
+        tutMainTitle: "How to Play", tutS1Title: "1. Observe News", tutS1Desc: "Read headline and check the source tag",
+        tutMockTag: "📌 Often in: Line Group", tutMockText: "Drink fish sauce to cure cancer!",
+        tutS2Title: "2. Catch the Lies", tutS2Desc: "Tap the words that are exaggerated or illogical", tutMockWord: "cure cancer!",
+        tutS3Title: "3. Real News Exists", tutS3Desc: "If the news is reasonable, tap 'Normal News'",
+        btnTutBack: "Back", btnTutNext: "Next", btnTutStart: "Start Game!"
+    }
 };
 
 const evalTexts = {
@@ -11,18 +37,8 @@ const evalTexts = {
 };
 
 const summaryTexts = {
-    th: [
-        { title: "Master 🌟", desc: "วิจารณญาณสูง ไม่ตกเป็นเหยื่อของข่าวลวงแน่นอน!" },
-        { title: "Advanced 🏅", desc: "วิเคราะห์ได้ดีมาก แต่อาจเผลอเชื่อคำอ้างที่เนียนตาบ้าง" },
-        { title: "Beginner ⚠️", desc: "มีแนวโน้มจะเชื่อข้อมูลกระตุ้นอารมณ์ ควรระมัดระวัง" },
-        { title: "Critical 🚨", desc: "ระดับการรู้เท่าทันสื่ออยู่ในเกณฑ์น่าเป็นห่วง เสี่ยงถูกหลอก" }
-    ],
-    en: [
-        { title: "Master 🌟", desc: "Excellent discernment. Immune to fake news!" },
-        { title: "Advanced 🏅", desc: "Good analysis, occasionally susceptible to smooth claims." },
-        { title: "Beginner ⚠️", desc: "Tends to fall for emotional triggers. Caution advised." },
-        { title: "Critical 🚨", desc: "Media literacy is at a dangerous level. High scam risk." }
-    ]
+    th: [ { title: "Master 🌟", desc: "วิจารณญาณสูง ไม่ตกเป็นเหยื่อของข่าวลวงแน่นอน!" }, { title: "Advanced 🏅", desc: "วิเคราะห์ได้ดีมาก แต่อาจเผลอเชื่อคำอ้างที่เนียนตาบ้าง" }, { title: "Beginner ⚠️", desc: "มีแนวโน้มจะเชื่อข้อมูลกระตุ้นอารมณ์ ควรระมัดระวัง" }, { title: "Critical 🚨", desc: "ระดับการรู้เท่าทันสื่ออยู่ในเกณฑ์น่าเป็นห่วง เสี่ยงถูกหลอก" } ],
+    en: [ { title: "Master 🌟", desc: "Excellent discernment. Immune to fake news!" }, { title: "Advanced 🏅", desc: "Good analysis, occasionally susceptible to smooth claims." }, { title: "Beginner ⚠️", desc: "Tends to fall for emotional triggers. Caution advised." }, { title: "Critical 🚨", desc: "Media literacy is at a dangerous level. High scam risk." } ]
 };
 
 // ข้อมูล 30 ข้อแบบบีบอัด
@@ -35,15 +51,14 @@ const DATA=[
 {t:{h:"เล่นมือถือในที่มืด แสงสะสมจนเป็นมะเร็งตา",w:["เล่นมือถือที่มืด","แสงสะสม","เป็นมะเร็งตา"],s:"Line",l:"แสงจอมือถือไม่ทำให้เป็นมะเร็ง"},e:{h:"Phones in dark causes eye cancer!",w:["Phones in dark","Light accumulates","Eye cancer"],s:"Line",l:"Screens don't cause cancer."},tr:[0,1],rf:[2]},
 {t:{h:"ชาร์จแบต 10 วิ แค่เอาโทรศัพท์เข้าไมโครเวฟ!",w:["ชาร์จแบต 10 วิ","เอาเข้าไมโครเวฟ","คนทำตามเพียบ"],s:"TikTok",l:"เอาโลหะเข้าไมโครเวฟจะระเบิด"},e:{h:"Charge battery 10 secs by microwaving phone!",w:["Charge 10 secs","Microwave phone","Many tried"],s:"TikTok",l:"Microwaving metal causes explosions."},tr:[2],rf:[0,1]},
 {t:{h:"แพทย์แนะ ทาครีมกันแดด 2 ข้อนิ้ว ลดมะเร็งผิวหนัง",w:["แพทย์แนะ","ครีมกันแดด","ลดมะเร็งผิวหนัง"],s:"News",l:"เป็นคำแนะนำสากล"},e:{h:"Doctors advise sunscreen 2 fingers to reduce skin cancer.",w:["Doctors advise","Sunscreen","Reduce skin cancer"],s:"News",l:"Universal medical advice."},tr:[],rf:[]},
-{t:{h:"UN ปิดข่าว! AI คำนวณโลกจะแตกใน 3 เดือน",w:["UN ปิดข่าว","AI คำนวณ","โลกจะแตก 3 เดือน"],s:"Forum",l:"AI ไม่ใช่เครื่องพยากรณ์โลกแตก"},e:{h:"UN cover-up! AI says world ends in 3 months.",w:["UN cover-up","AI says","World ends 3 months"],s:"Forum",l:"AI cannot predict apocalypse."},tr:[0],rf:[1,2]},
 {t:{h:"หมอดูเตือน! เลื่อนผ่านจะสอบตก พิมพ์สาธุแก้เคล็ด",w:["หมอดูเตือน","เลื่อนผ่านสอบตก","พิมพ์สาธุแก้เคล็ด"],s:"FB",l:"ข้อความลูกโซ่ใช้ความกลัวหลอกคน"},e:{h:"Psychic warns! Scroll and fail exams. Type Amen!",w:["Psychic warns","Fail exams","Type Amen"],s:"FB",l:"Fear-mongering chain mail."},tr:[0],rf:[1,2]},
-{t:{h:"ลงทุนทองคำ 99 บาท กำไรการันตี 5,000 บาท",w:["ลงทุน 99 บาท","กำไรการันตี 5,000","ถอนได้ทันที"],s:"FB",l:"การันตีกำไรสูง=แชร์ลูกโซ่"},e:{h:"Invest 99 THB, guarantee 5,000 THB profit!",w:["Invest 99","Guarantee 5,000","Withdraw instantly"],s:"FB",l:"High guaranteed return = scam."},tr:[2],rf:[0,1]},
+{t:{h:"ลงทุนทองคำ 99 บาท กำไรการันตี 5,000 บาท ถอนได้ทันที!",w:["ลงทุน 99 บาท","กำไรการันตี 5,000","ถอนได้ทันที"],s:"FB",l:"การันตีกำไรสูง=แชร์ลูกโซ่"},e:{h:"Invest 99 THB, guarantee 5,000 THB profit!",w:["Invest 99","Guarantee 5,000","Withdraw instantly"],s:"FB",l:"High guaranteed return = scam."},tr:[2],rf:[0,1]},
 {t:{h:"สธ. แนะดื่มน้ำวันละ 8 แก้ว รักษาสมดุลร่างกาย",w:["สธ. แนะ","ดื่มน้ำ 8 แก้ว","รักษาสมดุล"],s:"News",l:"คำแนะนำสุขภาพทั่วไป"},e:{h:"MOPH advises 8 glasses water daily for balance.",w:["MOPH advises","8 glasses","Maintain balance"],s:"News",l:"Standard health advice."},tr:[],rf:[]},
+{t:{h:"แจก iPhone ฟรี 50 เครื่อง กรอกรหัสบัตรประชาชนที่นี่",w:["แจก iPhone ฟรี","กรอกรหัสบัตรประชาชน","ที่นี่"],s:"Web",l:"หลอกขโมยข้อมูลบัตรปชช."},e:{h:"Free iPhone giveaway! Enter ID card number here.",w:["Free iPhone","Enter ID card","Here"],s:"Web",l:"Classic phishing tactic."},tr:[0],rf:[1]},
 {t:{h:"ตำรวจไซเบอร์เตือน ห้ามกดลิงก์ SMS แปลกปลอม",w:["ตำรวจเตือน","ห้ามกดลิงก์ SMS","แปลกปลอม"],s:"News",l:"คำเตือนที่มีประโยชน์"},e:{h:"Cyber police warn: Do not click strange SMS links.",w:["Police warn","Do not click","Strange links"],s:"News",l:"Useful public warning."},tr:[],rf:[]},
-{t:{h:"กินใบมะละกอต้มน้ำปลา ทำลายเซลล์มะเร็งทุกชนิด",w:["ต้มใบมะละกอ","ทำลายเซลล์มะเร็ง","ทุกชนิด"],s:"Line",l:"สมุนไพรเดี่ยวไม่สามารถรักษามะเร็งได้ทุกชนิด"},e:{h:"Boil papaya leaves destroys all cancer cells.",w:["Boil leaves","Destroys cancer","All types"],s:"Line",l:"No single herb cures all cancers."},tr:[0],rf:[1,2]},
+{t:{h:"กินใบมะละกอต้ม ทำลายเซลล์มะเร็งทุกชนิด",w:["ต้มใบมะละกอ","ทำลายเซลล์มะเร็ง","ทุกชนิด"],s:"Line",l:"สมุนไพรเดี่ยวไม่สามารถรักษามะเร็งได้ทุกชนิด"},e:{h:"Boil papaya leaves destroys all cancer cells.",w:["Boil leaves","Destroys cancer","All types"],s:"Line",l:"No single herb cures all cancers."},tr:[0],rf:[1,2]},
 {t:{h:"พัสดุติดศุลกากร! โอนค่าปรับ 2,500 เข้าบัญชีส่วนตัวนาย A",w:["ติดศุลกากร","ค่าปรับ 2,500","เข้าบัญชีส่วนตัวนาย A"],s:"Email",l:"รัฐไม่ให้โอนเงินเข้าบัญชีบุคคล"},e:{h:"Customs package stuck! Pay 2,500 to Mr. A's personal account.",w:["Customs stuck","Pay 2,500","Personal account"],s:"Email",l:"Govs don't use personal accounts."},tr:[0],rf:[2]},
 {t:{h:"นายกฯ ออกทีวีแนะนำเว็บสล็อต แจกโบนัส 100%",w:["นายกฯ แนะนำ","เว็บสล็อต","โบนัส 100%"],s:"TikTok",l:"ใช้ AI (Deepfake) ตัดต่อคลิปผู้นำ"},e:{h:"PM on TV recommends slot site with 100% bonus!",w:["PM recommends","Slot site","100% bonus"],s:"TikTok",l:"Deepfake video scam."},tr:[2],rf:[0,1]},
-{t:{h:"นาซ่าปกปิด! มนุษย์ต่างดาวสร้างพีระมิดบนดวงจันทร์ แชร์ก่อนลบ",w:["นาซ่าปกปิด","ต่างดาวสร้างพีระมิด","แชร์ก่อนลบ"],s:"X",l:"ทฤษฎีสมคบคิดแต่งเรื่อง"},e:{h:"NASA cover-up! Aliens built pyramids on moon. Share before deleted!",w:["NASA cover-up","Aliens built pyramids","Share before deleted"],s:"X",l:"Conspiracy clickbait."},tr:[2],rf:[0,1]},
 {t:{h:"แบงก์ชาติคงอัตราดอกเบี้ย 2.50% เพื่อรักษาเสถียรภาพ",w:["แบงก์ชาติ","คงดอกเบี้ย 2.50%","รักษาเสถียรภาพ"],s:"News",l:"ประกาศนโยบายการเงินจริง"},e:{h:"BOT holds interest rate at 2.50% for stability.",w:["BOT holds rate","2.50%","Stability"],s:"News",l:"Real financial policy update."},tr:[],rf:[]},
 {t:{h:"กู้หมื่นผ่อนร้อย ไม่เช็คบูโร อนุมัติ 5 นาที โอนไว",w:["กู้หมื่นผ่อนร้อย","ไม่เช็คบูโร","อนุมัติ 5 นาที"],s:"FB",l:"แอปเงินกู้เถื่อนหลอกดูดข้อมูล"},e:{h:"Borrow 10k pay 100, no credit check, approved in 5 mins.",w:["Borrow 10k","No credit check","Approved 5 mins"],s:"FB",l:"Illegal loan app scam."},tr:[0],rf:[1,2]},
 {t:{h:"อย. เตือนอาหารเสริมอวดอ้างลดน้ำหนักเกินจริง",w:["อย. เตือน","อาหารเสริม","ลดน้ำหนักเกินจริง"],s:"News",l:"ประกาศเตือนภัยจากภาครัฐ"},e:{h:"FDA warns against exaggerated weight loss supplements.",w:["FDA warns","Supplements","Exaggerated loss"],s:"News",l:"Valid government warning."},tr:[],rf:[]},
@@ -56,7 +71,6 @@ const DATA=[
 {t:{h:"คอร์สรวยข้ามคืน ก๊อปโพสต์ทำเงินแสน ไม่ต้องลงทุน",w:["รวยข้ามคืน","ทำเงินแสน","ไม่ต้องลงทุน"],s:"TikTok",l:"คนรวยคือคนขายคอร์สหลอกฝัน"},e:{h:"Overnight rich course. Copy posts make 100k, zero invest.",w:["Overnight rich","Make 100k","Zero invest"],s:"TikTok",l:"Get-rich-quick course scam."},tr:[1],rf:[0,2]}
 ];
 
-// แปลงข้อมูลรูปแบบบีบอัด ให้เกมอ่านได้
 const ORIGINAL_CASES_DATA = DATA.map(d => ({
     th: { headline: d.t.h, words: d.t.w, source: d.t.s, logic: d.t.l },
     en: { headline: d.e.h, words: d.e.w, source: d.e.s, logic: d.e.l },
@@ -66,8 +80,11 @@ const ORIGINAL_CASES_DATA = DATA.map(d => ({
 const TOTAL_CASES = 10;
 let remainingCases = [], currentCase = null, currentCaseNum = 1, correctAnswersCount = 0;
 let selectedWordsSet = new Set(); 
+let tutCurrentStep = 1;
+let tutorialPassed = false; // ตัวแปรเช็คว่าผ่าน Tutorial หรือยัง
 
 const homeScreen = document.getElementById('home-screen'), gameScreen = document.getElementById('game-screen');
+const tutorialScreen = document.getElementById('tutorial-screen');
 const summaryScreen = document.getElementById('summary-screen'), resultOverlay = document.getElementById('result-overlay');
 const wordFeedbackBox = document.getElementById('word-feedback'), startSpinBtn = document.getElementById('start-spin-btn');
 const caseSlot = document.getElementById('case-slot'), slotText = document.getElementById('slot-text');
@@ -89,6 +106,24 @@ function setLanguage(lang) {
     document.getElementById('btn-download').innerText = txt.btnDownload;
     document.getElementById('ui-insight-label').innerText = txt.insightLabel;
     document.getElementById('btn-restart').innerText = txt.btnRestart;
+    
+    // อัปเดตภาษาหน้า Tutorial
+    document.getElementById('ui-tut-main-title').innerText = txt.tutMainTitle;
+    document.getElementById('ui-tut-s1-title').innerText = txt.tutS1Title;
+    document.getElementById('ui-tut-s1-desc').innerText = txt.tutS1Desc;
+    document.getElementById('ui-tut-mock-tag').innerText = txt.tutMockTag;
+    document.getElementById('ui-tut-mock-text').innerText = txt.tutMockText;
+    document.getElementById('ui-tut-s2-title').innerText = txt.tutS2Title;
+    document.getElementById('ui-tut-s2-desc').innerText = txt.tutS2Desc;
+    document.getElementById('ui-tut-mock-word').innerText = txt.tutMockWord;
+    document.getElementById('ui-tut-s3-title').innerText = txt.tutS3Title;
+    document.getElementById('ui-tut-s3-desc').innerText = txt.tutS3Desc;
+    document.getElementById('ui-tut-mock-safe').innerText = txt.btnSafe;
+    document.getElementById('tut-back-btn').innerText = txt.btnTutBack;
+
+    if (tutCurrentStep === 3) document.getElementById('tut-next-btn').innerText = txt.btnTutStart;
+    else document.getElementById('tut-next-btn').innerText = txt.btnTutNext;
+
     if (caseSlot.className === 'case-slot') slotText.innerText = txt.slotReady;
     updateHomeUI();
 }
@@ -97,7 +132,61 @@ function updateHomeUI() {
     if (currentCaseNum <= TOTAL_CASES) startSpinBtn.innerText = `${uiTexts[currentLang].btnSpinPrefix} ${currentCaseNum}/${TOTAL_CASES}`;
 }
 
-// 2. หมุนสล็อตอัตโนมัติ (DNA จากคลาส setInterval)
+// 2. ระบบ Tutorial
+function updateTutorialView() {
+    const txt = uiTexts[currentLang];
+    document.getElementById('tut-step-1').classList.add('hidden');
+    document.getElementById('tut-step-2').classList.add('hidden');
+    document.getElementById('tut-step-3').classList.add('hidden');
+    document.getElementById(`tut-step-${tutCurrentStep}`).classList.remove('hidden');
+    
+    document.getElementById('dot-1').classList.remove('active');
+    document.getElementById('dot-2').classList.remove('active');
+    document.getElementById('dot-3').classList.remove('active');
+    document.getElementById(`dot-${tutCurrentStep}`).classList.add('active');
+
+    if (tutCurrentStep === 1) {
+        document.getElementById('tut-back-btn').classList.add('hidden');
+        document.getElementById('tut-next-btn').innerText = txt.btnTutNext;
+    } else if (tutCurrentStep === 2) {
+        document.getElementById('tut-back-btn').classList.remove('hidden');
+        document.getElementById('tut-next-btn').innerText = txt.btnTutNext;
+    } else if (tutCurrentStep === 3) {
+        document.getElementById('tut-back-btn').classList.remove('hidden');
+        document.getElementById('tut-next-btn').innerText = txt.btnTutStart;
+    }
+}
+
+document.getElementById('tut-next-btn').onclick = () => {
+    if (tutCurrentStep < 3) {
+        tutCurrentStep++;
+        updateTutorialView();
+    } else {
+        tutorialPassed = true;
+        switchScreenSmoothly(tutorialScreen, homeScreen, () => {
+            triggerSpin(); // จบ Tutorial ให้หมุนสล็อตเลย
+        });
+    }
+};
+
+document.getElementById('tut-back-btn').onclick = () => {
+    if (tutCurrentStep > 1) {
+        tutCurrentStep--;
+        updateTutorialView();
+    }
+};
+
+startSpinBtn.onclick = () => {
+    // เช็คว่าผ่าน Tutorial หรือยัง
+    if (!tutorialPassed) {
+        tutCurrentStep = 1;
+        updateTutorialView();
+        switchScreenSmoothly(homeScreen, tutorialScreen, () => {});
+    } else {
+        triggerSpin();
+    }
+};
+
 function triggerSpin() {
     startSpinBtn.disabled = true; caseSlot.className = 'case-slot'; 
     const randomIndex = Math.floor(Math.random() * remainingCases.length);
@@ -117,9 +206,8 @@ function triggerSpin() {
         currentTick++;
     }, tickInterval);
 }
-startSpinBtn.onclick = triggerSpin;
 
-// ฟังก์ชันเปิดปิดคำศัพท์แบบซ่อน (ใช้สำหรับ .map)
+// ฟังก์ชันเปิดปิดคำศัพท์
 window.toggleWord = function(index, el) {
     el.classList.toggle('selected');
     selectedWordsSet.has(index) ? selectedWordsSet.delete(index) : selectedWordsSet.add(index);
@@ -133,7 +221,6 @@ function loadCaseToJudgingView() {
     document.getElementById('headline').innerText = cLang.headline;
     document.getElementById('source-badge').innerText = `${txt.sourcePrefix}${cLang.source}`;
     
-    // ใช้เทคนิคเดียวกับคลาสในการวาด List
     document.getElementById('word-pool').innerHTML = cLang.words.map((w, i) => 
         `<div class="word-chip" onclick="toggleWord(${i}, this)">${w}</div>`
     ).join('');
@@ -151,13 +238,13 @@ function evaluateAnalysis(markedSafe) {
         else {
             evalResult = txtEval.wrongTrue;
             let wrongWords = Array.from(selectedWordsSet).map(i => `"${cLang.words[i]}"`).join(", ");
-            feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; margin-bottom:5px;">${uiTxt.wrongLabel}</div><div style="color: var(--accent-yellow-shadow); font-weight:700;">${wrongWords}</div>`;
+            feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; margin-bottom:5px; font-weight:700;">${uiTxt.wrongLabel}</div><div style="color: var(--accent-yellow-shadow); font-weight:800;">${wrongWords}</div>`;
         }
     } else {
         if (markedSafe) {
             evalResult = txtEval.wrongFake;
             let missedWords = c.redFlags.map(i => `"${cLang.words[i]}"`).join(", ");
-            feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; margin-bottom:5px;">${uiTxt.missedLabel}</div><div style="color: var(--accent-red); font-weight:700;">${missedWords}</div>`;
+            feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; margin-bottom:5px; font-weight:700;">${uiTxt.missedLabel}</div><div style="color: var(--accent-red); font-weight:800;">${missedWords}</div>`;
         } else {
             let missedIndices = c.redFlags.filter(i => !selectedWordsSet.has(i));
             let wrongIndices = Array.from(selectedWordsSet).filter(i => !c.redFlags.includes(i));
@@ -165,8 +252,8 @@ function evaluateAnalysis(markedSafe) {
                 isCorrect = true; evalResult = txtEval.correctFake;
             } else {
                 evalResult = txtEval.partialFake;
-                if (missedIndices.length > 0) feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem;">${uiTxt.missedLabel}</div><div style="color: var(--accent-red); margin-bottom: 8px; font-weight:700;">${missedIndices.map(i => `"${cLang.words[i]}"`).join(", ")}</div>`;
-                if (wrongIndices.length > 0) feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem;">${uiTxt.wrongLabel}</div><div style="color: var(--accent-yellow-shadow); font-weight:700;">${wrongIndices.map(i => `"${cLang.words[i]}"`).join(", ")}</div>`;
+                if (missedIndices.length > 0) feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; font-weight:700;">${uiTxt.missedLabel}</div><div style="color: var(--accent-red); margin-bottom: 8px; font-weight:800;">${missedIndices.map(i => `"${cLang.words[i]}"`).join(", ")}</div>`;
+                if (wrongIndices.length > 0) feedbackHTML += `<div style="color: var(--text-sub); font-size: 0.85rem; font-weight:700;">${uiTxt.wrongLabel}</div><div style="color: var(--accent-yellow-shadow); font-weight:800;">${wrongIndices.map(i => `"${cLang.words[i]}"`).join(", ")}</div>`;
             }
         }
     }
@@ -206,10 +293,9 @@ function showFinalSummary() {
     document.getElementById('summary-desc').innerText = summaryContent.desc;
 }
 
-// ฟังก์ชันแคปหน้าจอจากคลาสเรียนเป๊ะๆ
 document.getElementById('btn-download').onclick = () => {
     const target = document.getElementById('summary-capture');
-    html2canvas(target, { backgroundColor: '#F9FAFB', scale: 2 }).then(canvas => {
+    html2canvas(target, { backgroundColor: '#FFFFFF', scale: 2 }).then(canvas => {
         const link = document.createElement('a');
         link.download = `LoneJuror-Score-${correctAnswersCount}.png`;
         link.href = canvas.toDataURL('image/png');
@@ -231,9 +317,10 @@ function switchScreenSmoothly(currentScreen, nextScreen, setupFunction) {
 
 function initApp() {
     remainingCases = [...ORIGINAL_CASES_DATA]; 
-    correctAnswersCount = 0; currentCaseNum = 1;
-    homeScreen.style.display = ""; gameScreen.style.display = ""; summaryScreen.style.display = "";
-    gameScreen.classList.add('hidden'); summaryScreen.classList.add('hidden'); homeScreen.classList.remove('hidden');
+    correctAnswersCount = 0; currentCaseNum = 1; tutorialPassed = false;
+    homeScreen.style.display = ""; gameScreen.style.display = ""; summaryScreen.style.display = ""; tutorialScreen.style.display = "";
+    gameScreen.classList.add('hidden'); summaryScreen.classList.add('hidden'); tutorialScreen.classList.add('hidden');
+    homeScreen.classList.remove('hidden');
     setLanguage('th');
 }
 initApp();
